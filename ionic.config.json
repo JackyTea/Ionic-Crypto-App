@@ -1,0 +1,7 @@
+{
+  "name": "JTea_DPS926_Assignment4",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
