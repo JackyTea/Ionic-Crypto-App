@@ -28,6 +28,8 @@ export class CoinDetailsPage implements OnInit {
     this.networkManager.getOneCoin(this.id).subscribe((data) => {
       const coinData = data as Coin;
       this.coin = coinData;
+      this.coin.description.en = this.coin.description.en.length > 200 ?
+        this.coin.description.en.substring(0, 200) : this.coin.description.en;
     });
   }
 
