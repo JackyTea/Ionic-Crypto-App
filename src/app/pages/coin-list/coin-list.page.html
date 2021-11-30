@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Coin List</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div id="container">
+    <ion-list *ngFor="let c of coins">
+      <ion-item [routerLink]="['/coin-list-details', c.id]">
+        <ion-avatar slot="start">
+          <ion-img [src]="c.image.small"> </ion-img>
+        </ion-avatar>
+        <ion-label>
+          <h2>{{ c.name }}</h2>
+          <p>{{ c.symbol }}</p>
+        </ion-label>
+        <p text-wrap style="color: gray;">{{ c.market_data.current_price.usd | currency:'USD':'symbol' }} USD</p>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

@@ -1,21 +1,26 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      DPS926 Assignment 4 - Crypto App
-    </ion-title>
+    <ion-title> Crypto Explorer </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+      <ion-title size="large">Crypto Explorer</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <div id="container">
-    <ion-list *ngFor="let coin of coinData">
-      <ion-item>{{ coin.id }}</ion-item>
-    </ion-list>
+    <ion-card>
+      <ion-card-header>
+        <img src="../../../assets/crypto.jpg" />
+      </ion-card-header>
+
+      <ion-card-content>
+        <input type="text" /><button>Search</button><br/>
+        <button [routerLink]="['/coin-list']">View Coins</button><button [routerLink]="['/favourites-list']">Favourites List</button>
+      </ion-card-content>
+    </ion-card>
   </div>
 </ion-content>

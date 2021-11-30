@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Coin List Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div id="container" *ngIf="coin">
+    {{ coin.name }}
+    {{ coin.image.large }}
+    {{ coin.symbol }}
+    {{ coin.market_data.current_price.usd }}
+    {{ coin.id }}
+    {{ coin.description.en }}
+  </div>
+</ion-content>
