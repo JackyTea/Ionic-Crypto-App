@@ -16,17 +16,16 @@ const routes: Routes = [
     loadChildren: () => import('./pages/coin-list/coin-list.module').then(m => m.CoinListPageModule)
   },
   {
-    path: 'coin-list-details/:id',
-    loadChildren: () => import('./pages/coin-list-details/coin-list-details.module').then(m => m.CoinListDetailsPageModule)
-  },
-  {
     path: 'favourites-list',
     loadChildren: () => import('./pages/favourites-list/favourites-list.module').then(m => m.FavouritesListPageModule)
   },
   {
-    path: 'favourites-list-details',
-    loadChildren: () => import('./pages/favourites-list-details/favourites-list-details.module')
-      .then(m => m.FavouritesListDetailsPageModule)
+    path: 'coin-details/:id',
+    loadChildren: () => import('./pages/coin-details/coin-details.module').then( m => m.CoinDetailsPageModule)
+  },
+  {
+    path: 'favourites-details/:id',
+    loadChildren: () => import('./pages/favourites-details/favourites-details.module').then( m => m.FavouritesDetailsPageModule)
   },
 ];
 

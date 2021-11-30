@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { CoinListDetailsPageRoutingModule } from './coin-list-details-routing.module';
+import { CoinDetailsPageRoutingModule } from './coin-details-routing.module';
 
-import { CoinListDetailsPage } from './coin-list-details.page';
+import { CoinDetailsPage } from './coin-details.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CoinListDetailsPageRoutingModule
+    CoinDetailsPageRoutingModule
   ],
-  declarations: [CoinListDetailsPage]
+  declarations: [CoinDetailsPage]
 })
-export class CoinListDetailsPageModule {}
+export class CoinDetailsPageModule {}

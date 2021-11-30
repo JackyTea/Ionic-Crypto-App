@@ -4,11 +4,11 @@ import { Coin } from 'src/app/interfaces/coin';
 import { NetworkingManagerService } from 'src/app/services/networking-manager.service';
 
 @Component({
-  selector: 'app-coin-list-details',
-  templateUrl: './coin-list-details.page.html',
-  styleUrls: ['./coin-list-details.page.scss'],
+  selector: 'app-coin-details',
+  templateUrl: './coin-details.page.html',
+  styleUrls: ['./coin-details.page.scss'],
 })
-export class CoinListDetailsPage implements OnInit {
+export class CoinDetailsPage implements OnInit {
 
   public coin: Coin;
 

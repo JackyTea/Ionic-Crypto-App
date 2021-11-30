@@ -10,7 +10,7 @@
 <ion-content>
   <div id="container">
     <ion-list *ngFor="let c of coins">
-      <ion-item [routerLink]="['/coin-list-details', c.id]">
+      <ion-item [routerLink]="['/coin-details', c.id]">
         <ion-avatar slot="start">
           <ion-img [src]="c.image.small"> </ion-img>
         </ion-avatar>
