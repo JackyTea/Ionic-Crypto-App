@@ -1,9 +1,41 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>FavouritesDetails</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Favourites Details</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <div id="container" *ngIf="favourite">
+    <ion-card style="padding: 10px">
+      <img [src]="favourite.image.large" />
+      <ion-card-content style="text-align: center">
+        <div
+          style="display: flex; align-items: center; justify-content: center"
+        >
+          <ion-card style="padding: 10px; border-radius: 10px">
+            <p style="color: gray">Name</p>
+            <p style="font-weight: bold">{{ favourite.name }}</p>
+          </ion-card>
+          <ion-card style="padding: 10px; border-radius: 10px">
+            <p style="color: gray">Symbol</p>
+            <p style="font-weight: bold">{{ favourite.symbol }}</p>
+          </ion-card>
+          <ion-card style="padding: 10px; border-radius: 10px">
+            <p style="color: gray">Price (USD)</p>
+            <p style="font-weight: bold">
+              {{ favourite.market_data.current_price.usd |
+              currency:'USD':'symbol' }}
+            </p>
+          </ion-card>
+        </div>
+        <p>{{ favourite.description.en }}</p>
+        <input type="text" />
+        <ion-button color="warning" shape="full" expand="block" (click)="updateFavourite()">Update Coin</ion-button>
+        <ion-button color="danger" shape="full" expand="block" (click)="removeFromFavourites()">Remove From Favourites</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

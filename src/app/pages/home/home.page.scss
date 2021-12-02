@@ -6,6 +6,7 @@
   right: 0;
   top: 50%;
   transform: translateY(-50%);
+  margin: 0 20px;
 }
 
 #container strong {
@@ -25,3 +26,36 @@
 #container a {
   text-decoration: none;
 }
+
+img {
+  border-radius: 10px;
+}
+
+input {
+  border: #8c8c8c solid 1px;
+  background: white;
+  color: black;
+}
+
+.mainCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.mainCardContent {
+  margin-top: 100px;
+}
+
+button {
+  border-radius: 10px;
+  background: rgb(46, 106, 146);
+  padding: 10px 30px 10px 30px;
+  margin: 5px;
+}
+
+button:hover {
+  background: rgb(23, 55, 77);
+}
+
+

@@ -78,7 +78,6 @@ export class DatabaseManagerService {
 
   addCoin(coin) {
     const data = [coin.id, coin.symbol, coin.name, coin.image.small, coin.market_data.current_price.usd, coin.description.en];
-    console.log('The following coin exists -> ',this.coinExists(coin.id).then(_ => {}));
     return this.storage.executeSql(
       'INSERT INTO favouritestable (coinId, coinSymbol, coinName, coinImage, coinPrice, coinDescription) \
        VALUES (?, ?, ?, ?, ?, ?)', data)
@@ -87,8 +86,20 @@ export class DatabaseManagerService {
       });
   }
 
+  deleteCoin(id) {
+    return this.storage.executeSql('DELETE FROM favouritestable WHERE coinId = ?', [id])
+    .then(_ => {
+      this.getCoins();
+    });
+  }
+
+  updateCoin(oldId, newCoin) {
+    this.deleteCoin(oldId);
+    this.addCoin(newCoin);
+  }
+
   getCoin(id: string): Promise<Coin> {
-    return this.storage.executeSql('SELECT * FROM favouritestable WHERE id = ?', [id]).then(res => ({
+    return this.storage.executeSql('SELECT * FROM favouritestable WHERE coinId = ?', [id]).then(res => ({
       id: res.rows.item(0).coinId,
       symbol: res.rows.item(0).coinSymbol,
       name: res.rows.item(0).coinName,
@@ -100,9 +111,5 @@ export class DatabaseManagerService {
       marketData: { currentPrice: { usd: res.rows.item(0).coinPrice } },
       description: { en: res.rows.item(0).coinDescription }
     }));
-  }
-
-  coinExists(id: string) {
-    return this.storage.executeSql('SELECT EXISTS(SELECT 1 FROM favouritestable WHERE coinId = ?)', [id]).then(res => res);
   }
 }

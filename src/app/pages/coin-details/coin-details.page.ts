@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Coin } from 'src/app/interfaces/coin';
+import { Router } from '@angular/router';
 import { DatabaseManagerService } from 'src/app/services/database-manager.service';
 import { NetworkingManagerService } from 'src/app/services/networking-manager.service';
 
@@ -18,7 +19,8 @@ export class CoinDetailsPage implements OnInit {
   constructor(
     private databaseManager: DatabaseManagerService,
     private networkManager: NetworkingManagerService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -37,6 +39,7 @@ export class CoinDetailsPage implements OnInit {
 
   addToFavourites() {
     this.databaseManager.addCoin(this.coin).then(_ => {});
+    this.router.navigate(['/coin-list']);
   }
 
 }

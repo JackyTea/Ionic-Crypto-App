@@ -12,14 +12,47 @@
   </ion-header>
 
   <div id="container">
-    <ion-card>
+    <ion-card class="mainCard">
       <ion-card-header>
         <img src="../../../assets/crypto.jpg" />
+        <div style="margin: 10px 0">
+          <form [formGroup]="searchForm" (ngSubmit)="searchCoin($event)">
+            <ion-item>
+              <ion-label position="floating">Coin Name</ion-label>
+              <ion-input
+                formControlName="searchTerm"
+                type="text"
+                required
+              ></ion-input>
+            </ion-item>
+            <ion-row>
+              <ion-col>
+                <ion-button
+                  type="submit"
+                  color="primary"
+                  shape="full"
+                  expand="block"
+                >
+                  Search
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </form>
+        </div>
       </ion-card-header>
 
-      <ion-card-content>
-        <input type="text" /><button>Search</button><br/>
-        <button [routerLink]="['/coin-list']">View Coins</button><button [routerLink]="['/favourites-list']">Favourites List</button>
+      <ion-card-content class="mainCardContent">
+        <br />
+        <div>
+          <ion-button color="primary" shape="full" expand="block" [routerLink]="['/coin-list']">
+            View Coins
+          </ion-button>
+        </div>
+        <div>
+          <ion-button color="primary" shape="full" expand="block" [routerLink]="['/favourites-list']">
+            Favourites List
+          </ion-button>
+        </div>
       </ion-card-content>
     </ion-card>
   </div>

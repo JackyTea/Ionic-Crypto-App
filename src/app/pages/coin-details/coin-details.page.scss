@@ -7,3 +7,15 @@
   top: 50%;
   transform: translateY(-50%);
 }
+
+button {
+  border-radius: 10px;
+  background: rgb(46, 106, 146);
+  padding: 10px 30px 10px 30px;
+  margin: 5px;
+}
+
+button:hover {
+  background: rgb(23, 55, 77);
+}
+

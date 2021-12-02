@@ -9,27 +9,29 @@
 
 <ion-content>
   <div id="container" *ngIf="coin">
-    <ion-card>
+    <ion-card style="padding: 10px">
       <img [src]="coin.image.large" />
-      <ion-card-content style="text-align: center;">
-        <div style="display: flex; align-items: center; justify-content: center;">
-          <ion-card>
+      <ion-card-content style="text-align: center">
+        <div
+          style="display: flex; align-items: center; justify-content: center"
+        >
+          <ion-card style="padding: 10px; border-radius: 10px">
             <p style="color: gray">Name</p>
-            <h1>{{ coin.name }}</h1>
+            <p style="font-weight: bold">{{ coin.name }}</p>
           </ion-card>
-          <ion-card>
+          <ion-card style="padding: 10px; border-radius: 10px">
             <p style="color: gray">Symbol</p>
-            <h1>{{ coin.symbol }}</h1>
+            <p style="font-weight: bold">{{ coin.symbol }}</p>
           </ion-card>
-          <ion-card>
+          <ion-card style="padding: 10px; border-radius: 10px">
             <p style="color: gray">Price (USD)</p>
-            <h1>
+            <p style="font-weight: bold">
               {{ coin.market_data.current_price.usd | currency:'USD':'symbol' }}
-            </h1>
+            </p>
           </ion-card>
         </div>
         <p>{{ coin.description.en }}</p>
-        <button (click)="addToFavourites()">Add To Favourites</button>
+        <ion-button color="primary" shape="full" expand="block" (click)="addToFavourites()">Add To Favourites</ion-button>
       </ion-card-content>
     </ion-card>
   </div>
