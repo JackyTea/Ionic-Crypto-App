@@ -8,5 +8,18 @@
 </ion-header>
 
 <ion-content>
-
+  <div id="container">
+    <ion-list-header>Your Favourites</ion-list-header>
+    <ion-list *ngFor="let f of favourites">
+      <ion-item [routerLink]="['/favourites-details', f.id]">
+        <ion-avatar slot="start">
+          <ion-img [src]="f.image.small"> </ion-img>
+        </ion-avatar>
+        <ion-label>
+          <h2>{{ f.name }}</h2>
+          <p>{{ f.symbol }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
 </ion-content>

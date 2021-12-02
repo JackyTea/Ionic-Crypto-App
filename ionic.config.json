@@ -1,7 +1,10 @@
 {
   "name": "JTea_DPS926_Assignment4",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {
+      "enabled": false
+    },
+    "cordova": {}
   },
   "type": "angular"
 }

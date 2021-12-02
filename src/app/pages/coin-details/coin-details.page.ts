@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Coin } from 'src/app/interfaces/coin';
+import { DatabaseManagerService } from 'src/app/services/database-manager.service';
 import { NetworkingManagerService } from 'src/app/services/networking-manager.service';
 
 @Component({
@@ -15,6 +16,7 @@ export class CoinDetailsPage implements OnInit {
   public id: string;
 
   constructor(
+    private databaseManager: DatabaseManagerService,
     private networkManager: NetworkingManagerService,
     private route: ActivatedRoute
   ) { }
@@ -31,6 +33,10 @@ export class CoinDetailsPage implements OnInit {
       this.coin.description.en = this.coin.description.en.length > 200 ?
         this.coin.description.en.substring(0, 200) : this.coin.description.en;
     });
+  }
+
+  addToFavourites() {
+    this.databaseManager.addCoin(this.coin).then(_ => {});
   }
 
 }

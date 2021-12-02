@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Coin } from 'src/app/interfaces/coin';
+import { DatabaseManagerService } from 'src/app/services/database-manager.service';
 
 @Component({
   selector: 'app-favourites-list',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FavouritesListPage implements OnInit {
 
-  constructor() { }
+  public favourites: Coin[];
+
+  constructor(private databaseManager: DatabaseManagerService) { }
 
   ngOnInit() {
+    this.databaseManager.dbState().subscribe((data) => {
+      if(data) {
+        this.databaseManager.fetchCoins().subscribe((faves) => {
+          console.log('JOE HERE ', faves);
+          this.favourites = faves;
+        });
+      }
+    });
   }
 
 }
