@@ -32,7 +32,7 @@
           </ion-card>
         </div>
         <p>{{ favourite.description.en }}</p>
-        <form [formGroup]="updateForm" (ngSubmit)="updateCoin($event)">
+        <form [formGroup]="updateForm" (ngSubmit)="updateFavourite($event)">
           <ion-item>
             <ion-label position="floating">Coin Name</ion-label>
             <ion-input
