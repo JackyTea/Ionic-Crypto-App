@@ -31,7 +31,23 @@
           </ion-card>
         </div>
         <p>{{ coin.description.en }}</p>
-        <ion-button color="primary" shape="full" expand="block" (click)="addToFavourites()">Add To Favourites</ion-button>
+
+        <ion-button
+          *ngIf="!isFavourited"
+          color="primary"
+          shape="full"
+          expand="block"
+          (click)="addToFavourites()"
+          >Add To Favourites</ion-button
+        >
+        <ion-button
+          *ngIf="isFavourited"
+          color="danger"
+          shape="full"
+          expand="block"
+          (click)="removeFromFavourites()"
+          >Remove From Favourites</ion-button
+        >
       </ion-card-content>
     </ion-card>
   </div>

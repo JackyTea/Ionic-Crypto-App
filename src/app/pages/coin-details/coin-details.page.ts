@@ -16,6 +16,8 @@ export class CoinDetailsPage implements OnInit {
 
   public id: string;
 
+  public isFavourited = true;
+
   constructor(
     private databaseManager: DatabaseManagerService,
     private networkManager: NetworkingManagerService,
@@ -35,11 +37,24 @@ export class CoinDetailsPage implements OnInit {
       this.coin.description.en = this.coin.description.en.length > 200 ?
         this.coin.description.en.substring(0, 200) : this.coin.description.en;
     });
+    this.databaseManager.getCoin(this.id).then((data) => {
+      const coinData = data as Coin;
+      if(coinData.id) {
+        this.isFavourited = true;
+      }
+    }).catch(_ => {
+      this.isFavourited = false;
+    });
   }
 
   addToFavourites() {
+    this.isFavourited = true;
     this.databaseManager.addCoin(this.coin).then(_ => {});
-    this.router.navigate(['/coin-list']);
+  }
+
+  removeFromFavourites() {
+    this.isFavourited = false;
+    this.databaseManager.deleteCoin(this.id).then(_ => {});
   }
 
 }

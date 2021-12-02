@@ -33,4 +33,7 @@ export class FavouritesListPage implements OnInit {
     }
   }
 
+  removeFromFavourites(id: string) {
+    this.databaseManager.deleteCoin(id).then(_ => {});
+  }
 }
