@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import { Coin } from 'src/app/interfaces/coin';
 import { Router } from '@angular/router';
 import { DatabaseManagerService } from 'src/app/services/database-manager.service';
@@ -21,6 +22,7 @@ export class CoinDetailsPage implements OnInit {
   constructor(
     private databaseManager: DatabaseManagerService,
     private networkManager: NetworkingManagerService,
+    private alertController: AlertController,
     private route: ActivatedRoute,
     private router: Router
   ) { }
@@ -47,14 +49,32 @@ export class CoinDetailsPage implements OnInit {
     });
   }
 
-  addToFavourites() {
+  async addToFavourites() {
     this.isFavourited = true;
     this.databaseManager.addCoin(this.coin).then(_ => {});
+    const alert = this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Success!',
+      subHeader: 'Your favourites are updated!',
+      message: `Added ${this.coin.name} to favourites!`,
+      buttons: ['OK']
+    });
+
+    (await alert).present();
   }
 
-  removeFromFavourites() {
+  async removeFromFavourites() {
     this.isFavourited = false;
     this.databaseManager.deleteCoin(this.id).then(_ => {});
+    const alert = this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Success!',
+      subHeader: 'Your favourites are updated!',
+      message: `Removed ${this.coin.name} from favourites!`,
+      buttons: ['OK']
+    });
+
+    (await alert).present();
   }
 
 }

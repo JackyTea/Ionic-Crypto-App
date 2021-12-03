@@ -50,21 +50,21 @@ export class HomePage implements OnInit {
 
       (await alert).present();
     } else {
-      this.networkManager.getOneCoin(this.searchForm.get('searchTerm').value.toLowerCase()).subscribe(async (data) => {
+      this.networkManager.getOneCoin(this.searchForm.get('searchTerm').value.toLowerCase()).subscribe((data) => {
         if (data) {
           const coinData = data as Coin;
           this.router.navigate(['/coin-details', coinData.id]);
-        } else {
-          const alert = this.alertController.create({
-            cssClass: 'my-custom-class',
-            header: 'Error!',
-            subHeader: 'Coin does not exist!',
-            message: `Could not find the coin ${this.searchForm.get('searchTerm').value}...`,
-            buttons: ['OK']
-          });
-
-          (await alert).present();
         }
+      }, async () => {
+        const alert = this.alertController.create({
+          cssClass: 'my-custom-class',
+          header: 'Error!',
+          subHeader: 'Coin does not exist!',
+          message: `Could not find the coin ${this.searchForm.get('searchTerm').value}...`,
+          buttons: ['OK']
+        });
+
+        (await alert).present();
       });
     }
     this.searchForm.reset();

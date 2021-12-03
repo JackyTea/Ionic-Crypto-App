@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Coin } from 'src/app/interfaces/coin';
 import { Router } from '@angular/router';
@@ -23,6 +24,7 @@ export class FavouritesDetailsPage implements OnInit {
     private databaseManager: DatabaseManagerService,
     private networkManager: NetworkingManagerService,
     public formBuilder: FormBuilder,
+    private alertController: AlertController,
     private route: ActivatedRoute,
     private router: Router
   ) { }
@@ -50,29 +52,63 @@ export class FavouritesDetailsPage implements OnInit {
     });
   }
 
-  updateFavourite(event: Event) {
+  async updateFavourite(event: Event) {
     event.preventDefault();
     if (!this.updateForm.dirty ||
       !this.updateForm.valid ||
       !this.updateForm.get('updateTerm').value
     ) {
+      const alert = this.alertController.create({
+        cssClass: 'my-custom-class',
+        header: 'Error!',
+        subHeader: 'Empty field!',
+        message: `Search field cannot be empty!`,
+        buttons: ['OK']
+      });
 
+      (await alert).present();
     } else {
-      this.networkManager.getOneCoin(this.updateForm.get('updateTerm').value.toLowerCase()).subscribe((data) => {
+      this.networkManager.getOneCoin(this.updateForm.get('updateTerm').value.toLowerCase()).subscribe(async (data) => {
         if(data) {
           const coinData = data as Coin;
           this.databaseManager.updateCoin(this.id, coinData);
           this.router.navigate(['/favourites-list']);
-        } else {
+          const alert = this.alertController.create({
+            cssClass: 'my-custom-class',
+            header: 'Success!',
+            subHeader: 'Your favourites are updated!',
+            message: `Updated ${this.favourite.name} to ${coinData.name} in favourites!`,
+            buttons: ['OK']
+          });
 
+          (await alert).present();
         }
+      }, async () => {
+        const alert = this.alertController.create({
+          cssClass: 'my-custom-class',
+          header: 'Error!',
+          subHeader: 'Coin does not exist!',
+          message: `Could not find the coin ${this.updateForm.get('searchTerm').value}...`,
+          buttons: ['OK']
+        });
+
+        (await alert).present();
       });
     }
     this.updateForm.reset();
   }
 
-  removeFromFavourites() {
+  async removeFromFavourites() {
     this.databaseManager.deleteCoin(this.id).then(_ => { });
+    const alert = this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Success!',
+      subHeader: 'Your favourites are updated!',
+      message: `Removed ${this.favourite.name} from favourites!`,
+      buttons: ['OK']
+    });
+
+    (await alert).present();
     this.router.navigate(['/favourites-list']);
   }
 

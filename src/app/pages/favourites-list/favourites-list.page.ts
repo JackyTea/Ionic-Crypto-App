@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Coin } from 'src/app/interfaces/coin';
+import { AlertController } from '@ionic/angular';
 import { DatabaseManagerService } from 'src/app/services/database-manager.service';
 import { NetworkingManagerService } from 'src/app/services/networking-manager.service';
 
@@ -14,7 +15,8 @@ export class FavouritesListPage implements OnInit {
 
   constructor(
     private networkManager: NetworkingManagerService,
-    private databaseManager: DatabaseManagerService
+    private databaseManager: DatabaseManagerService,
+    private alertController: AlertController
   ) { }
 
   ngOnInit() {
@@ -33,7 +35,16 @@ export class FavouritesListPage implements OnInit {
     }
   }
 
-  removeFromFavourites(id: string) {
+  async removeFromFavourites(id: string) {
     this.databaseManager.deleteCoin(id).then(_ => {});
+    const alert = this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Success!',
+      subHeader: 'Your favourites are updated!',
+      message: `Removed ${id} from favourites!`,
+      buttons: ['OK']
+    });
+
+    (await alert).present();
   }
 }
